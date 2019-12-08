@@ -22,5 +22,16 @@ Complete description you can found [here](https://docs.microsoft.com/en-us/aspne
 
 * Set **Target Location** to _wwwroot/js/signalr/_, and select Install.
 
+## Create a SignalR hub
+
+A hub is a class that serves as a high-level pipeline that handles client-server communication. We will call hub member functions from Java script and give back notification to Java script
+
+* In the Demo project folder, create a Hubs folder.
+
+ * In the Hubs folder, create a LongOperationHub class into LongOperationHub.cs:
+   * It must be inherited from **Hub** class 
+   * It must have the constructor with parameter _IHubContext<LongOperationHub> hubContext_. Normally Hub is short live time object, with hub context we could use it longer.
+   * It could have some member functions. We have main function _Start_ and test function _SendMessage_. In Addition we could use _OnConnectedAsync_ and _OnDisconnectedAsync_.
+
 ***
 **Not finished, first commit**
