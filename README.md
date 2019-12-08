@@ -22,4 +22,5 @@ Complete description you can found [here](https://docs.microsoft.com/en-us/aspne
 
 * Set **Target Location** to _wwwroot/js/signalr/_, and select Install.
 
-
+***
+**Not finished, first commit**
