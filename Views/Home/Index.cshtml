@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Core 3.0 DEMO application</h1>
+    <p>It is demo ASP.NET MVC application for long time operation with progress bar and SignalR</p>
+    <p>First, we go to the confirmation page and then come automatically back.</p>
+       <p> Such pattern I need for my application. If you don't need operation confirmation, copy script from confirmation page.</p>
+</div>
+<form asp-action="Start">
+    <div class="form-group">
+        <input type="submit" value="Start with confirmation page" class="btn btn-primary" />
+    </div>
+</form>
