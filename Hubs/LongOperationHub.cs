@@ -36,16 +36,17 @@ namespace ASP.NET.Core.LongTimeOperation.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
-        public void Start(int parameter)
+        public void Start(string connectionId)
         {
-            Task.Run(() => { LongOperationTask(parameter); });
+            Task.Run(() => { LongOperationTask(connectionId); });
         }
 
         //simulate a long task
-        private void LongOperationTask(int parameter)
+        private void LongOperationTask(string connectionId)
         {
             DateTime start = DateTime.UtcNow;
-            int maxCount = 100;
+            int maxCount = 200;
+            
             for (int i = 0; i < maxCount; i++)
             {
                 //Do operation slowly
@@ -53,9 +54,9 @@ namespace ASP.NET.Core.LongTimeOperation.Hubs
 
                 TimeSpan duration = DateTime.UtcNow - start;
                 string strDuration = String.Format("{0}", duration);
-                mHubContext.Clients.All.SendAsync("ReportProgress", duration.ToString("g"), i * 100 / (maxCount - 1));
+                mHubContext.Clients.Client(connectionId).SendAsync("ReportProgress", duration.ToString("g"), i * 100 / (maxCount - 1));
             }
-            mHubContext.Clients.All.SendAsync("ReportFinish");
+            mHubContext.Clients.Client(connectionId).SendAsync("ReportFinish");
         }
     }
 }

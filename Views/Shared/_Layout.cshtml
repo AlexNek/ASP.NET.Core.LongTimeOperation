@@ -10,55 +10,31 @@
 
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP.NET.Core.LongTimeOperation</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-@*PROGRESS BAR MODAL*@
-<div class="modal fade in" id="mod-progress" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <div class="i-circle warning"><i class="fas fa-info"></i></div>
-                    <div id="result" style="font-size: 1.1em; padding-bottom: 5px">
-                        <p id="progressBarParagraph"></p>
-                    </div>
-                    <div style="width: 30%; margin: 0 auto; display:none;">
-                        <div id="progressbar" style="width: 300px; height: 15px"></div>
-                        <br />
-                    </div>
-                    <div id="ProgressStripe" class="progress progress-striped active" style="position:relative; top:10px; width:100%;">
-                        <div id="ProgressMessage" class="progress-bar progress-bar-info" style="width: 100%; border:none;"></div>
-                    </div>
-                    <br />
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP.NET.Core.LongTimeOperation</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <!-- /.modal-content -->
+        </nav>
+    </header>
+    <div>
+        @await Component.InvokeAsync("ProgressBar")
     </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

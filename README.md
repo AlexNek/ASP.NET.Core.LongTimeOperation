@@ -1,4 +1,8 @@
+
 # ASP.NET.Core.LongTimeOperation
+*Note*
+>This simple solution used additional thread for running long operation which is not suitable for all situation.
+
 ASP.NET Core 3.0 - long time operation with progress bar Demo
 
 Some time ago I want to have progress bar for long time operation into Web application.
@@ -32,6 +36,8 @@ A hub is a class that serves as a high-level pipeline that handles client-server
    * It must be inherited from **Hub** class 
    * It must have the constructor with parameter _IHubContext<LongOperationHub> hubContext_. Normally Hub is short live time object, with hub context we could use it longer.
    * It could have some member functions. We have main function _Start_ and test function _SendMessage_. In Addition we could use _OnConnectedAsync_ and _OnDisconnectedAsync_.
+*Note*
+>We send notification back for one client only, that why we need connection id.
 
 ## Configure SignalR
 
@@ -113,5 +119,27 @@ Error console will be visible into web browser.
 
 *Note*
 >Press F12 for calling debug console in Firefox
+
+## Add progress bar
+
+We add progress bar component globally into site layout `\Views\Shared\_Layout.cshtml`
+For this you must add the script reference and component creating
+
+```JavaScript
+    <script src="~/js/progress_bar_helper.js" type="text/javascript"></script>
+```
+
+```HTML
+   <div>
+        @await Component.InvokeAsync("ProgressBar")
+    </div>
+```
+
+# Useful links
+[Differences between ASP.NET SignalR and ASP.NET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/version-differences?view=aspnetcore-3.1)
+
+[Use hubs in SignalR for ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-3.1)
+
+[SignalR Progress Bar Simple Example - Tutorial](https://github.com/dlazendi/SignalRProgressBar) - progress bar implementation based on this project
 ***
 **Not finished, first commit**

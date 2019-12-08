@@ -4,10 +4,15 @@
     ViewBag.Title = "Confirmation page";
 }
 <h2>Confirmation page</h2>
-
-<button onclick="StartProcess(1)" type="button" id="startButton" class="btn btn-primary btn-danger">Start the process</button>
-<a asp-action="Index">Back to List</a>
-
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/longoperation_support.js"></script>
+
+@*<script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/longOperationHub")
+        .build();
+</script>*@
+<button onclick="StartProcess()" type="button" id="startButton" class="btn btn-primary btn-danger">Start the process</button>
+<a asp-action="Index">Back to List</a>
+
 
