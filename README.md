@@ -1,9 +1,8 @@
 
-# ASP.NET.Core.LongTimeOperation
+# ASP.NET Core 3.0 - long time operation with progress bar Demo
 *Note*
 >This simple solution used additional thread for running long operation which is not suitable for all situation.
 
-ASP.NET Core 3.0 - long time operation with progress bar Demo
 
 Some time ago I want to have progress bar for long time operation into Web application.
 As I primary did it for Desktop applications before it was not a trivial task. After some researching I have found that the best way is to using SignalR with AJAX.
