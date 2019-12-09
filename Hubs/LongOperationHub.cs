@@ -53,9 +53,9 @@ namespace ASP.NET.Core.LongTimeOperation.Hubs
                 Thread.Sleep(100);
 
                 TimeSpan duration = DateTime.UtcNow - start;
-                await mHubContext.Clients.Client(connectionId).SendAsync("ReportProgress", duration.ToString("g"), i * 100 / (maxCount - 1));
+                await mHubContext.Clients.Client(connectionId).SendAsync("ReportProgress", duration.ToString("g"), i * 100 / (maxCount - 1)).ConfigureAwait(false);
             }
-            await mHubContext.Clients.Client(connectionId).SendAsync("ReportFinish");
+            await mHubContext.Clients.Client(connectionId).SendAsync("ReportFinish").ConfigureAwait(false);
         }
     }
 }
