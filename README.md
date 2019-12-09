@@ -1,7 +1,7 @@
 
 # ASP.NET Core 3.0 - long time operation with progress bar Demo
 *Note*
->This simple solution used additional thread for running long operation which is not suitable for all situation.
+>This simple solution is not suitable for all use cases. Feel free to adapt it.
 
 
 Some time ago I want to have progress bar for long time operation into Web application.
@@ -37,6 +37,45 @@ A hub is a class that serves as a high-level pipeline that handles client-server
    * It could have some member functions. We have main function _Start_ and test function _SendMessage_. In Addition we could use _OnConnectedAsync_ and _OnDisconnectedAsync_.
 *Note*
 >We send notification back for one client only, that why we need connection id.
+
+```C#
+public class LongOperationHub : Hub
+    {
+        private readonly IHubContext<LongOperationHub> mHubContext;
+
+        public LongOperationHub(IHubContext<LongOperationHub> hubContext)
+        {
+            mHubContext = hubContext;
+        }
+
+        public async Task SendMessage(string user, string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+
+        public async Task Start(string connectionId)
+        {
+            await LongOperationTask(connectionId);
+        }
+
+        //simulate a long task
+        private async Task LongOperationTask(string connectionId)
+        {
+            DateTime start = DateTime.UtcNow;
+            int maxCount = 200;
+            
+            for (int i = 0; i < maxCount; i++)
+            {
+                //Do operation slowly
+                Thread.Sleep(100);
+
+                TimeSpan duration = DateTime.UtcNow - start;
+                await mHubContext.Clients.Client(connectionId).SendAsync("ReportProgress", duration.ToString("g"), i * 100 / (maxCount - 1));
+            }
+            await mHubContext.Clients.Client(connectionId).SendAsync("ReportFinish");
+        }
+    }
+```
 
 ## Configure SignalR
 
